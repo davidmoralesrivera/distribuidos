@@ -33,7 +33,7 @@ class Cliente{
 		Cliente(int, string, int);
 
 		void conectarServidor(void);
-		//static void * actualizarTiempo(void *);
+		static void * actualizarTiempo(void *);
 		static void * tiempoCliente(void*);
 		static void * contarFrases(void *);
 
