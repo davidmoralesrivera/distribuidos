@@ -20,17 +20,24 @@ Cliente::Cliente(int puerto, string ip, int tiempo){
 
 void * Cliente::tiempoCliente(void * cli){
 	Cliente* cliente=(Cliente *) cli;
-	double time=0;
-	while(time<cliente->getTiempoVida()){
-		time=((double)clock()-inicial)/CLOCKS_PER_SEC;
-		//cout<< time<<endl;
-	}
-	cliente->setEstado(false);
+	char tiempo[60];
+	// double time=0;
+	// while(time<cliente->getTiempoVida()){
+	// 	time=((double)clock()-inicial)/CLOCKS_PER_SEC;
+	// 	//cout<< time<<endl;
+	// }
 
-	char fin[60]="finalizar sesion";
-	send(cliente->getDescriptor(),(void *) fin,60,0);
-	cout<<"Cliente desconectado"<<endl;	
-	exit(EXIT_SUCCESS);
+	// cliente->setEstado(false);
+
+	// char fin[60]="finalizar sesion";
+	// send(cliente->getDescriptor(),(void *) fin,60,0);
+	// cout<<"Cliente desconectado"<<endl;	
+	// exit(EXIT_SUCCESS);
+
+	while(1){
+		recv(cliente->getDescriptor(),(void *)&tiempo ,60,0);
+		cout<<tiempo<<endl;
+	}
 
 }
 
@@ -75,20 +82,21 @@ void Cliente::conectarServidor(){
 		pthread_t hilo;
 		pthread_create(&hilo,NULL,tiempoCliente,(void *)this);
 
-		pthread_t hilo2;
-		pthread_create(&hilo2,NULL,actualizarTiempo,(void *) this);
+		// pthread_t hilo2;
+		// pthread_create(&hilo2,NULL,actualizarTiempo,(void *) this);
 		int boolean=1;
 		
 		
 		while(boolean && estado){
 			char msg[128];
-		double tiempo= tiempoVida -((double)clock()-inicial)/CLOCKS_PER_SEC;
+			double tiempo= tiempoVida -((double)clock()-inicial)/CLOCKS_PER_SEC;
 
-		 ostringstream convertir;
-		 convertir<<tiempo;
+			ostringstream convertir;
+			convertir<<tiempo;
 
-		sprintf(msg,"Tiempo restante %s segundos",convertir.str().c_str());
-		
+			// sprintf(msg,"Tiempo restante %s segundos",convertir.str().c_str());
+			msg="Hola";
+			
 			int i=send(descriptorCliente,(void *)msg,sizeof(msg),0);
 			sleep(1);
 			if(i==-1){
@@ -100,8 +108,6 @@ void Cliente::conectarServidor(){
 		while(1){
 			
 		}	
-		close(descriptorCliente);
-		cout<<"termino la conexion"<<endl;	
 	}else{
 
 		cout<<"No se pudo conectar con el servidor"<<endl;

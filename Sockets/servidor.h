@@ -36,7 +36,7 @@ class Servidor{
 		void ejecutarServidor(void);
 
 		void migrarCodigo(void);
-		//void tiempos(void);
+		void tiempos(void);
 		void frases(void);
 		int buscarCliente(string);
 		
