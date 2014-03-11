@@ -59,7 +59,7 @@ void * recibirCliente(void * cli){
 				char msg[60];
 				sprintf(msg,"Hola");
 
-				send(cliente->getDescriptor(),(void *)msg,sizeof(msg),0);
+				send(cliente->getDescriptorCliente(),(void *)msg,sizeof(msg),0);
 				inicial=clock();
 			}
 		}else{
