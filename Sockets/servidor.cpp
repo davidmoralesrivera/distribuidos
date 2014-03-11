@@ -58,7 +58,8 @@ void * recibirCliente(void * cli){
 				cout<<"El cliente con ip: "<<inet_ntoa(cliente->getClienteInfor().sin_addr)<<" envio: "<<tiempo<<endl;
 				char msg[60];
 				sprintf(msg,"Hola");
-				send(cliente->getClienteInfor(),(void *)msg,sizeof(msg),0);
+
+				send(cliente->getDescriptor(),(void *)msg,sizeof(msg),0);
 				inicial=clock();
 			}
 		}else{
