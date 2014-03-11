@@ -94,8 +94,8 @@ void Cliente::conectarServidor(){
 			ostringstream convertir;
 			convertir<<tiempo;
 
-			// sprintf(msg,"Tiempo restante %s segundos",convertir.str().c_str());
-			msg="Hola";
+			sprintf(msg,"Hola");
+			//msg="Hola";
 			
 			int i=send(descriptorCliente,(void *)msg,sizeof(msg),0);
 			sleep(1);
