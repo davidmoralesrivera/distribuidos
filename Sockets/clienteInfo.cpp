@@ -6,12 +6,12 @@ ClienteInfo::ClienteInfo(int desc , struct sockaddr_in infor){
 	this->estado=true;
 }
 
-int Cliente::getId(){
-return this->id;
+int ClienteInfo::getId(){
+	return this->id;
 }
 
-void Cliente::setId(int id){
- this->id=id;
+void ClienteInfo::setId(int id){
+ 	this->id=id;
 }
 
 
