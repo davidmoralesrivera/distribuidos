@@ -1,7 +1,5 @@
 #include "servidor.h"
 
-//variables globales
-
 int cont;
 
 
@@ -52,7 +50,7 @@ void * recibirCliente(void * cli){
 
 			send(cliente->getDescriptorCliente(),(void *)mensajeAcliente,sizeof(mensajeAcliente),0);
 		}else{
-			//se acabo el tiempo//
+			
 			cout<<"Se desconecto el cliente con ip: "<<inet_ntoa(cliente->getClienteInfor().sin_addr)<<" con error"<<endl;
 			cliente->setEstado(false);
 			close(cliente->getDescriptorCliente());

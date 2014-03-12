@@ -1,7 +1,6 @@
 #include "cliente.h"
 
 Cliente::Cliente(){
-	//constructor por default
 	this->puertoServidor=9000;
 	this->ipServidor="192.168.1.10";
 	this->estado=true;
@@ -23,35 +22,49 @@ void * Cliente::escucharServidor(void * cli){
 	}
 }
 
+void * Cliente::escribirServidor(void * cli){
+	Cliente* cliente=(Cliente *) cli;
+
+	int conectado=1;
+	while(conectado){
+
+		char msg[128];
+		sprintf(msg,"Hola");
+
+		int i=send(cliente->getDescriptor(),(void *)msg,sizeof(msg),0);
+		sleep(1);
+
+		if(i==-1){
+			conectado=0;
+			cout<<"se desconecto del servidor"<<endl;
+			close(cliente->getDescriptor());
+			exit(EXIT_SUCCESS);
+		}
+	}	
+}
+
 void Cliente::conectarServidor(){
 
 	descriptorCliente= socket(AF_INET,SOCK_STREAM,0);
-	
+
 	servidorInfo.sin_family=AF_INET;
+
 	inet_pton(AF_INET,ipServidor.c_str(),&servidorInfo.sin_addr);
+
 	servidorInfo.sin_port=htons(puertoServidor);
+
 	int conn=connect(descriptorCliente,(struct sockaddr *)&servidorInfo,sizeof(servidorInfo));
 
 	if(conn!=-1){
-		pthread_t hilo;
-		pthread_create(&hilo,NULL,escucharServidor,(void *)this);
 
-		int boolean=1;
-		
-		while(boolean && estado){
+		pthread_t hiloEscucha;
+		pthread_create(&hiloEscucha,NULL,escucharServidor,(void *)this);
 
-			char msg[128];
-			sprintf(msg,"Hola");
 
-			int i=send(descriptorCliente,(void *)msg,sizeof(msg),0);
-			sleep(1);
+		pthread_t hiloEscribe;
+		pthread_create(&hiloEscribe,NULL,escribirServidor,(void *)this);
 
-			if(i==-1){
-				boolean=0;
-				cout<<"se desconecto del servidor"<<endl;
-				close(descriptorCliente);
-			}
-		}	
+		while(1);
 	}else{
 
 		cout<<"No se pudo conectar con el servidor"<<endl;

@@ -19,6 +19,7 @@ using namespace std;
 class Cliente{
 
 	private:
+		//atributos
 		int descriptorCliente;
 		struct sockaddr_in servidorInfo;
 		int puertoServidor;
@@ -27,16 +28,15 @@ class Cliente{
 
 
 	public:
-
+		//metodos
 		Cliente(void);
 		Cliente(int, string);
 
 		void conectarServidor(void);
 		static void * escucharServidor(void*);
-		static void * contarFrases(void *);
+		static void * escribirServidor(void*);
 	
 		
-
 		int getDescriptor(void);
 		void setDescriptor(int);
 

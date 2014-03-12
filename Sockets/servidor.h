@@ -2,7 +2,7 @@
 
 #include "clienteInfo.h"
 
-#define maxClientes 20
+#define maxClientes 100
 
 
 
