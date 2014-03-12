@@ -10,9 +10,7 @@ int main(int arg , char** args){
 
 	servidor.inicializarServidor();
 	servidor.ejecutarServidor();
-
-	// servidor.migrarCodigo();
-	// servidor.tiempos();	
+	
 	while(1);
 
 	return 0;

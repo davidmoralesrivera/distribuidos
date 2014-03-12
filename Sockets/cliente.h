@@ -23,22 +23,19 @@ class Cliente{
 		struct sockaddr_in servidorInfo;
 		int puertoServidor;
 		string ipServidor;
-		int tiempoVida;
 		bool estado;
 
 
 	public:
 
 		Cliente(void);
-		Cliente(int, string, int);
+		Cliente(int, string);
 
 		void conectarServidor(void);
-		static void * actualizarTiempo(void *);
-		static void * tiempoCliente(void*);
+		static void * escucharServidor(void*);
 		static void * contarFrases(void *);
-
-		int getTiempoVida(void);
-		void setTiempoVida(int);	
+	
+		
 
 		int getDescriptor(void);
 		void setDescriptor(int);

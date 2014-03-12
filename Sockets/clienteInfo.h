@@ -20,10 +20,13 @@ class ClienteInfo{
 		int descriptorCliente;
 		struct sockaddr_in clienteInfor; 
 		bool estado;
-
+		int id;
 	public:
 		
 		ClienteInfo(int ,struct sockaddr_in);
+
+		int getId(void);
+		void setId(int);
 
 		int getDescriptorCliente(void);
 		struct sockaddr_in getClienteInfor();

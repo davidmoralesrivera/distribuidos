@@ -18,9 +18,6 @@ class Servidor{
 		vector<ClienteInfo *> clientesDescriptor;
 
 		bool state;
-		//vector<pthread_t> clientesHilos;
-		//vector<struct sockaddr> clientesDescriptor;
-
 	public:
 		
 		//constructores
@@ -34,11 +31,6 @@ class Servidor{
 		void cerrarServidor(void);	
 		static void * comenzarServidor(void *);
 		void ejecutarServidor(void);
-
-		void migrarCodigo(void);
-		void tiempos(void);
-		void frases(void);
-		int buscarCliente(string);
 		
 		//set
 
